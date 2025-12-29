@@ -12,7 +12,7 @@ export default function Home() {
           <p>React</p>
           <p>Angular</p>
         </details>
-        <details>Backend
+        <details><strong>Backend</strong>
         <details>
           <strong>Databases</strong>
             <p>Node</p>
