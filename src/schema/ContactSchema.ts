@@ -10,3 +10,9 @@ export const ContactSchema = z.object({
 });
 
 export type ContactState = z.infer<typeof ContactSchema>;
+
+export type FormState = {
+    errors?: {[K in keyof ContactState]?: string[]};
+    message?: string;
+    data?: ContactState;
+}

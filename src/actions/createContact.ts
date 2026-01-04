@@ -1,23 +1,10 @@
 "use server"
-import { ContactSchema, ContactState } from "../schema/ContactSchema";
+import {z, ZodError} from 'zod';
+import { ContactSchema, FormState } from "../schema/ContactSchema";
 
 
-/*export interface ContactState {
-    message: string | string[],
-    errors?: Record<keyof ContactSchema, string | string[]> | null,
-    data: {
-        firstname: string,
-        lastname: string,
-        emailaddress: string,
-        phonenumber: string,
-        message: string,
-    }
-}
-*/
-
-
-export async function createContact(prevData:any, formData: FormData) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
+ try{
     const data = {
         firstname: formData.get("firstname"),
         lastname: formData.get("lastname"),
@@ -26,21 +13,24 @@ export async function createContact(prevData:any, formData: FormData) {
         message: formData.get("message")
     }
 
-    const validatedFields = ContactSchema.safeParse(data);
-
-    if(!validatedFields.success){
-        return {
-            message: 'Form was not submitted',
-            error: validatedFields.error.flatten().fieldErrors,
-            
-        };
-    }
-
-    const contactData = validatedFields.data;
-
+    const validatedFields = await ContactSchema.parseAsync(data);
     return {
         message: "Form submitted succesfully",
-        //error: null
-    }
+        errors: {}
+    };
+
+ } catch(err){
+     if(err instanceof ZodError){
+        return {
+            message: "Invalid input",
+            errors: z.flattenError(err).fieldErrors     
+        };
+     }
+     return {
+        message: "A server error occured", 
+        errors:{}
+     };
+ }
+
 }
 
