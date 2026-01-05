@@ -20,20 +20,23 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         method: "POST",
         body: JSON.stringify(validatedFields.data),
         headers: { "Content-Type": "application/json"}
+    
     })
 
     
     const apiResult = await response.json();
-
-    await prisma.contact.create({data: apiResult, omit:{
-        id: true
-    }});
-
-    return {
+    try {
+        await prisma.contact.create({data: apiResult})
+        return {
             message: apiResult.success && "Form submitted succesfully",
             errors: {}
-    };
-
+        };
+    } catch(err) {
+        return {
+            message: "Database failures",
+            errors: apiResult.errors
+        }
+    }
 
  } catch(err){
      if(err instanceof ZodError){
@@ -44,7 +47,7 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
      }
      return {
         message: "A server error occured", 
-        errors: {}
+        errors:{}
      };
  }
 
