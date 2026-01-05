@@ -6,7 +6,7 @@ import { prisma } from '../../lib/prisma';
 export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
     const rawData = Object.fromEntries(formData.entries());
 
-    const validatedFields = await ContactSchema.safeParse(rawData);
+    const validatedFields = await ContactSchema.safeParseAsync(rawData);
     try{
     /*const data = {
         firstname: formData.get("firstname"),
@@ -16,14 +16,24 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         message: formData.get("message")
     }*/
 
-    /*const newContact = await prisma.contact.create({
-        data: validatedFields.data,
-    })*/
+    const response = await fetch("http://localhost:3000/contact",{
+        method: "POST",
+        body: JSON.stringify(validatedFields.data),
+        headers: { "Content-Type": "application/json"}
+    })
+
+    
+    const apiResult = await response.json();
+
+    await prisma.contact.create({data: apiResult, omit:{
+        id: true
+    }});
 
     return {
-        message: "Form submitted succesfully",
-        errors: {}
+            message: apiResult.success && "Form submitted succesfully",
+            errors: {}
     };
+
 
  } catch(err){
      if(err instanceof ZodError){
@@ -34,7 +44,7 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
      }
      return {
         message: "A server error occured", 
-        errors:{}
+        errors: {}
      };
  }
 
