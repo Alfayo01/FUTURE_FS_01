@@ -2,7 +2,7 @@ import ProgressBar from "@/components/ProgressBar";
 import Technology from "@/components/Technology";
 import Profile from "@/components/Profile";
 import FilePicker from "@/components/FilePicker";
-import ContactForm from "@/components/ContactForm";
+import ContactButton from "@/components/ContactButton";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Technology>
         <ProgressBar/>
       </Technology>
-      <ContactForm/>
+      <ContactButton/>
     </div>
   );
 }

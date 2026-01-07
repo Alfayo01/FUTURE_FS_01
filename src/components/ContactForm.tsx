@@ -15,7 +15,7 @@ export default function ContactForm(){
         initialState,
 );
     return (
-        <Form action={contactAction}>
+        <Form action={contactAction} className="px-6 py-8 m-auto rounded-2xl outline-2 outline-black">
             <label htmlFor="firstname">First Name:</label>
             <input id="firstname" name="firstname" type="text" value={state.data?.firstname}/>
             {state.errors?.firstname && <p>state.errors.firstname[0]</p>}

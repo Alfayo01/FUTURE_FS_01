@@ -1,6 +1,7 @@
-
+"use client"
 import { proficiencyList } from "@/lib/proficiencyList";
 import React from "react";
+
 export default function Technology({children }:{children: React.ReactNode}){
     return (
         <>
@@ -9,7 +10,7 @@ export default function Technology({children }:{children: React.ReactNode}){
 
             return (
 
-                <details key={tech.name}>
+                <details key={tech.name} className="outline-2 outline-amber-50 rounded-lg bg-sky-100">
                     <summary><strong>{tech.name}</strong></summary>
                     <ul>{tech.tools.flatMap((tool) => {
                         return (
