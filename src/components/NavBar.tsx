@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks } from "../lib/routes";
+import { navLinks } from "../app/routes";
 
 
 export default function NavBar(){

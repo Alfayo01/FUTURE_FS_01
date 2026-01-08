@@ -2,17 +2,18 @@ import ProgressBar from "@/components/ProgressBar";
 import Technology from "@/components/Technology";
 import Profile from "@/components/Profile";
 import FilePicker from "@/components/FilePicker";
-import ContactButton from "@/components/ContactButton";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
     <div>
-      <Profile/>
-      <FilePicker/>
-      <Technology>
-        <ProgressBar/>
-      </Technology>
-      <ContactButton/>
+      <Suspense fallback="<p>Loading...</p>">
+        <Profile/>
+        <FilePicker/>
+          <Technology>
+            <ProgressBar/>
+          </Technology>
+      </Suspense>
     </div>
   );
 }

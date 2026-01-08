@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Resume Portfolio",
-  description: "Ampadu Resume Portfolio",
+  description: "Victor Opoti Resume Portfolio",
 };
 
 export default function RootLayout({
@@ -31,7 +31,6 @@ export default function RootLayout({
       >
         <NavBar/>
         {children}
-        
       </body>
     </html>
   );

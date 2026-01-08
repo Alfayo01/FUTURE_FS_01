@@ -1,9 +1,9 @@
-"use server"
 import {z, ZodError} from 'zod';
 import { ContactSchema, FormState } from "../schema/ContactSchema";
 import { prisma } from '../../lib/prisma';
 
 export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
+    "use server";
     const rawData = Object.fromEntries(formData.entries());
 
     const validatedFields = await ContactSchema.safeParseAsync(rawData);
@@ -16,11 +16,11 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         message: formData.get("message")
     }*/
 
-    const response = await fetch("/contact", {
+    const response = await fetch("http://localhost:3000/contact", {
         method: "POST",
         body: JSON.stringify(validatedFields.data),
         headers: { "Content-Type": "application/json"}
-    
+        
     })
 
     
