@@ -3,14 +3,24 @@ import { createContact } from "@/actions/createContact";
 import { type FormState } from "@/schema/ContactSchema";
 import Form from "next/form";
 import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 
+function SubmitButton(){
+    const {pending} = useFormStatus();
+    return (
+        <button>
+            <button type="submit" disabled={pending} className="outline-2 focus:outline-black bg-amber-900 text-amber-50">{pending ? 'Sending':'Send'}</button>
+        </button>
+    )
+}
 const initialState:FormState = {
             message: "",
             errors:{}
 }
 
+
 export default function ContactForm(){
-    const [state, contactAction, isPending]  = useActionState( 
+    const [state, contactAction]  = useActionState( 
         createContact,
         initialState,
 );
@@ -31,7 +41,7 @@ export default function ContactForm(){
             <label htmlFor="firstname">Message:</label>
             <textarea id="firstname" name="message" rows={30} cols={50} value={state.data?.message}></textarea>
             {state.errors?.message && <p>state.errors.message[0]</p>}
-            <button type="submit">{isPending ? 'Sending':'Send'}</button>
+            <SubmitButton/>
         </Form>
     )
 }
