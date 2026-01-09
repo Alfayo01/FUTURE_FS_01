@@ -1,7 +1,7 @@
-import { PrismaClient, Prisma } from "../app/generated/prisma/client";
+import { PrismaClient, Prisma } from "../src/app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg"
 import 'dotenv/config'
-import { ContactCreateInput } from "../app/generated/prisma/models";
+import { ContactCreateInput } from "../src/app/generated/prisma/models";
 
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL,

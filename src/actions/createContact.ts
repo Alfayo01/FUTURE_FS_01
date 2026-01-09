@@ -1,6 +1,6 @@
 import {z, ZodError} from 'zod';
 import { ContactSchema, FormState } from "../schema/ContactSchema";
-import { prisma } from '../../lib/prisma';
+import { prisma } from '../lib/prisma';
 
 export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
     "use server";

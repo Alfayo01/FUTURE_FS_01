@@ -1,11 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navLinks } from "../app/routes";
 
 
 export default function NavBar(){
     const pathName = usePathname();
+    const navLinks = [
+        { name: "Register", href:"/register" },
+        { name: "Login", href:"/login" },
+        { name: "Logout", href:"/logout"}
+    ]
     return (
      
         <nav className="w-full py-5 flex items-center justify-between">

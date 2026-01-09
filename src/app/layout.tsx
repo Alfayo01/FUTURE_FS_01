@@ -6,6 +6,7 @@ import FilePicker from "@/components/FilePicker";
 import Profile from "@/components/Profile";
 import ProgressBar from "@/components/ProgressBar";
 import Technology from "@/components/Technology";
+import ContactButton from "@/components/ContactButton";
 
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
                   <Technology>
                   <ProgressBar/>
                 </Technology>
+            <ContactButton/>
       </body>
     </html>
   );

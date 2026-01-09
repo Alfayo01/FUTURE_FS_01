@@ -1,4 +1,3 @@
-"use client"
 import { createContact } from "@/actions/createContact";
 import { type FormState } from "@/schema/ContactSchema";
 import Form from "next/form";
