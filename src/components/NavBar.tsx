@@ -8,12 +8,15 @@ export default function NavBar(){
     const navLinks = [
         { name: "Register", href:"/register" },
         { name: "Login", href:"/login" },
-        { name: "Logout", href:"/logout"}
+        { name: "Logout", href:"/logout"},
+        { name: "Projects", href: "/projects"},
+        { name: "About", href: "/about"},
+        { name: "Contact", href: "/contact"}
     ]
     return (
      
         <nav className="w-full py-5 flex items-center justify-between">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-8 justify-items-stretch md:place-items-center-safe">
           { navLinks.map((link) => {
 
             const isActive = pathName === link.href || ( pathName.startsWith(link.href) && link.href !== "/" );

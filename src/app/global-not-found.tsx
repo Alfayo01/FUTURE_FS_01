@@ -1,10 +1,12 @@
+"use client"
 import Link from "next/link";
 
-export default function NotFound(){
+export default function NotFound({ error }: { error: Error}){
+    const response = new Response();
     return (
         <div>
-            <h2>Not Found</h2>
-            <p>Could not find requested resource</p>
+            <h2>{response.status}</h2>
+            <p>{error.message}</p>
             <Link href="/">Return Home</Link>
         </div>
     )

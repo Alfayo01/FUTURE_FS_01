@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
-import FilePicker from "@/components/FilePicker";
-import Profile from "@/components/Profile";
-import ProgressBar from "@/components/ProgressBar";
-import Technology from "@/components/Technology";
-import ContactButton from "@/components/ContactButton";
+
 
 
 const geistSans = Geist({
@@ -36,12 +32,6 @@ export default function RootLayout({
       >
         <NavBar/>
         {children}
-                <Profile/>
-                <FilePicker/>
-                  <Technology>
-                  <ProgressBar/>
-                </Technology>
-            <ContactButton/>
       </body>
     </html>
   );
