@@ -20,7 +20,7 @@ const initialState:FormState = {
 
 
 export default function ContactForm(){
-    const [state, contactAction]  = useActionState( 
+    const [state, contactAction] = useActionState( 
         createContact,
         initialState,
 );

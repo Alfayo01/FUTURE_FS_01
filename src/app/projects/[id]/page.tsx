@@ -1,7 +1,8 @@
 
+
 export default async function Projects({ params }: { params: Promise<{projectId: string}>}){
 
-    const project_id = (await (params)).projectId;
+    const project_id = ((await params)).projectId;
 
 
     return (
