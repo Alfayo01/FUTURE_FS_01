@@ -1,7 +1,11 @@
+
+import { ContactState } from "@/schema/ContactSchema";
 import { PrismaClient, Prisma } from "../src/app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg"
 import 'dotenv/config'
-import { ContactCreateInput } from "../src/app/generated/prisma/models";
+
+
+
 
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL,
@@ -18,7 +22,7 @@ const prisma = new PrismaClient({
 
 
  
-const contactData: Prisma.ContactCreateInput[] = [
+const contactData: Prisma.ContactCreateInput[]  = [
 {
     id: 1,
     firstname: "Okuku",
@@ -26,7 +30,6 @@ const contactData: Prisma.ContactCreateInput[] = [
     emailaddress: "okukudeli@gov.kido",
     phonenumber: 2346785910,
     message: "need a medical clinic website asap can we talk",
-
 },
 {
     id: 2,
@@ -35,9 +38,9 @@ const contactData: Prisma.ContactCreateInput[] = [
     emailaddress: "francolwambo@gov.kido",
     phonenumber: 2367785910,
     message: "need a medical clinic website asap can we talk",
-   
 }
 ]
+
 
 export async function main() {
     for(const c of contactData){
@@ -54,3 +57,4 @@ main().then(async () => {
     await prisma.$disconnect()
     process.exit(1)
 });
+

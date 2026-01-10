@@ -24,7 +24,7 @@ export default function ContactForm(){
         initialState,
 );
     return (
-        <Form action={contactAction} className="shadow-md/30 text-black flex flex-col w-96 px-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
+        <Form action={contactAction} className="shadow-md/30 text-black flex flex-col max-w-96 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
             <h1 className="text-2xl font-semibold-semi-expanded text-center mb-3">Contact Form</h1>
             <label htmlFor="firstname">First Name:</label>
             <input id="firstname" name="firstname" type="text" value={state.data?.firstname}/>

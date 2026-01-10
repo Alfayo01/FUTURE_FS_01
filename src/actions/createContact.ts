@@ -1,12 +1,16 @@
-import {z, ZodError} from 'zod';
+import {z, ZodError } from 'zod';
 import { ContactSchema, FormState } from "../schema/ContactSchema";
-import { prisma } from '../lib/prisma';
+//import { prisma } from '../lib/prisma';
+import { revalidatePath } from 'next/cache';
+//import { addContacts } from '@/lib/db-services';
+import { prisma } from '@/lib/prisma';
+
 
 export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
     const rawData = Object.fromEntries(formData.entries());
 
     const validatedFields = await ContactSchema.safeParseAsync(rawData);
-    try{
+    
     /*const data = {
         firstname: formData.get("firstname"),
         lastname: formData.get("lastname"),
@@ -21,34 +25,43 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         headers: { "Content-Type": "application/json"}
         
     })
-
-    
     const apiResult = await response.json();
-    try {
-        await prisma.contact.create({data: apiResult})
+
+         if(!validatedFields.success){
+
+             return {
+                message: "Invalid input",
+                errors: z.flattenError(validatedFields.error).fieldErrors     
+            };
+        }
+  
+
+
+    try{ 
+        //await addContacts(apiResult);
+        await prisma.contact.create({
+            data: apiResult.data,
+        })
+        revalidatePath("/")
         return {
-            message: apiResult.success && "Form submitted succesfully",
+            message: "Form submitted succesfully",
             errors: {}
         };
-    } catch(err) {
-        return {
-            message: "Database failures",
-            errors: apiResult.errors
-        }
-    }
 
- } catch(err){
-     if(err instanceof ZodError){
-        return {
-            message: "Invalid input",
-            errors: z.flattenError(err).fieldErrors     
-        };
-     }
+    } catch (err){
+        if(err instanceof ZodError){
+            return {
+                errors: z.flattenError(err).fieldErrors,
+                message: "Invalid input"
+            };
+       
+         }
      return {
         message: "A server error occured", 
         errors:{}
      };
- }
+
+    }
 
 }
 

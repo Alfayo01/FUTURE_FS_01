@@ -1,16 +1,28 @@
+import { prisma } from "@/lib/prisma";
 import { ContactSchema } from "@/schema/ContactSchema";
+//import { addContacts } from "../../../../prisma/seed";
+import { NextResponse } from "next/server";
 
-export async function POST(formData:FormData){
-    const rawData = Object.fromEntries(formData.entries());
+export async function POST(req: Request){
+    try {
+    const body = await req.json();
     
-    const validatedFields = await ContactSchema.safeParseAsync(rawData);
+    const validatedFields = ContactSchema.safeParse(body);
 
-    const response = await fetch("http://localhost:3000/api/contact", {
-        method: "POST",
-        body: JSON.stringify(validatedFields.data),
-        headers: { "Content-Type": "application/json"}
-    })
+    if(!validatedFields.success){
+        return new NextResponse(JSON.stringify({ error: validatedFields.error }))
 
-    const apiResult = await response.json();
-    return Response.json(apiResult);
+    }
+    /*const newContact = await prisma.contact.create({
+        data: new Response(JSON.stringify(validatedFields.data)).json(),
+    })//await addContacts(validatedFields.data);
+    return NextResponse.json({ newContact }, {status: 201}); */
+
+    } catch(err){
+        return new NextResponse("Internal Server Error", { status: 404});
+    }
+    
 }
+
+
+
