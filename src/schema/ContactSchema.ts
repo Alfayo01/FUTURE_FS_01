@@ -3,15 +3,15 @@ import { regexes, z } from 'zod';
 
 export const ContactSchema = z.object({
     id: z.coerce.number().int().positive(),
-    firstname: z.string().min(8, { error: "Incorrect first name.Try again"}),
-    lastname: z.string().min(8, { error: "Incorrect last name.Try again"}),
+    firstname: z.string().min(3, { error: "Incorrect first name.Try again"}),
+    lastname: z.string().min(3, { error: "Incorrect last name.Try again"}),
     emailaddress: z.email({pattern: regexes.unicodeEmail, error: "Incorrect email address.Try again"}),
     phonenumber: z.string().min(5, {
         error: "Telephone number is too short"
     }).refine((value) => parsePhoneNumberFromString(value), {
-        message: "Invalid telpehone number format"
+        message: "Invalid telephone number format"
     }),
-    message: z.string().max(255, {error: "Invalid message.Try again"})
+    message: z.string().max(255, {error: "Invalid message.Try again"}),
 });
 
 const CreateContactSchema = ContactSchema.omit({
@@ -44,7 +44,7 @@ function parsePhoneNumberFromString(value: string):boolean {
         return false;
     }
 
-    const telephoneRegex = /^\+?(?:[0-9]{1-3})?[\s-.]*\(?[0-9]{1,4}\)?[\s-.]*[0-9]{1-4}[\s-.]*[0-9]{1,9}$/;
+    const telephoneRegex = new RegExp(/^([+][\s0-9]+)?(\d{3}|[(]?[0-9]{3}[)]?[-]?[\s0-9])+$/);
 
     return telephoneRegex.test(value);
 }

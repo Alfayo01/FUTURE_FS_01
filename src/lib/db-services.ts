@@ -4,14 +4,14 @@ import { prisma } from "./prisma";
 import { ContactState, DeleteContactInput } from "@/schema/ContactSchema";
 
 export async function getContacts() {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    await prisma.contact.findMany();
+    return await prisma.contact.findMany();
 }
 
 export const getContact = cache(async(id: number) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    return prisma.contact.findUnique({
+    //await new Promise((resolve) => setTimeout(resolve, 1500))
+    return await prisma.contact.findUnique({
         where: {id},
     });
 })
@@ -22,6 +22,14 @@ export async function addContacts(data: ContactState){
     //{id, firstname, lastname, emailaddress, phonenumber, message}
     return await prisma.contact.create({
        data: data,
+       select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        emailaddress: true,
+        phonenumber: true,
+        message: true
+       }
     })
 }
 
@@ -31,9 +39,11 @@ export async function deleteContact(data: DeleteContactInput){
     });
 }
 
-
-function parsePhoneNumberFromString(val: string, country: string){
-    return '';
+module.exports = {
+    getContacts,
+    getContact,
+    addContacts,
+    deleteContact
 }
 
 
