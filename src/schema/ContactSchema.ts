@@ -2,7 +2,7 @@
 import { regexes, z } from 'zod';
 
 export const ContactSchema = z.object({
-    id: z.uuid(),
+    id: z.coerce.number().int().positive(),
     firstname: z.string({error: "Incorrect first name.Try again"}).min(2),
     lastname: z.string({ error: "Incorrect last name.Try again"}).min(2),
     emailaddress: z.email({pattern: regexes.unicodeEmail, error: "Incorrect email address.Try again"}),
@@ -17,11 +17,10 @@ const CreateContactSchema = ContactSchema.omit({
 export type ContactState = z.infer<typeof CreateContactSchema>
 
 export type FormState = {
+    success: boolean,
     errors?: {[K in keyof ContactState]?: string[]};
     message?: string;
     data?: ContactState;
 }
 
-function omit(id: () => { localeError: z.core.$ZodErrorMap; }) {
-    throw new Error('Function not implemented.');
-}
+

@@ -24,7 +24,6 @@ const prisma = new PrismaClient({
  
 const contactData: Prisma.ContactCreateInput[]  = [
 {
-    id: 1,
     firstname: "Okuku",
     lastname: "Deli",
     emailaddress: "okukudeli@gov.kido",
@@ -32,7 +31,6 @@ const contactData: Prisma.ContactCreateInput[]  = [
     message: "need a medical clinic website asap can we talk",
 },
 {
-    id: 2,
     firstname: "Franco",
     lastname: "Lwambo",
     emailaddress: "francolwambo@gov.kido",

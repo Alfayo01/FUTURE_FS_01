@@ -12,14 +12,22 @@ function SubmitButton(){
     )
 }
 const initialState:FormState = {
+            success: false,
             message: "",
-            errors:{}
+            errors: {},
+            data: {
+                firstname: '',
+                lastname: '',
+                emailaddress: '',
+                phonenumber: Number(12345),
+                message: '',
+            }
 }
 
 
 export default function ContactForm(){
 
-    const [state, contactAction] = useActionState( 
+    const [state, contactAction, isPending] = useActionState( 
         createContact,
         initialState,
 );
@@ -27,20 +35,23 @@ export default function ContactForm(){
         <Form action={contactAction} className="shadow-md/30 text-black flex flex-col max-w-96 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
             <h1 className="text-2xl font-semibold-semi-expanded text-center mb-3">Contact Form</h1>
             <label htmlFor="firstname">First Name:</label>
-            <input id="firstname" name="firstname" type="text" value={state.data?.firstname}/>
-            {state.errors?.firstname && <p>state.errors.firstname[0]</p>}
+            <input id="firstname" name="firstname" type="text" disabled={isPending} defaultValue={state.data?.firstname} className={state?.errors?.firstname ? 'border-500': ''}/>
+            {state?.errors?.firstname && <p className="text-red-500 text-sm">state.errors.firstname[0]</p>}
             <label htmlFor="firstname">Last Name:</label>
-            <input id="lastname" name="lastname" type="text" value={state.data?.lastname}/>
-            {state.errors?.lastname && <p>state.errors.lastname[0]</p>}
+            <input id="lastname" name="lastname" type="text" disabled={isPending} defaultValue={state.data?.lastname} className={state?.errors?.lastname ? 'border-500': ''}/>
+            {state?.errors?.lastname && <p className="text-red-500 text-sm">state.errors.lastname[0]</p>}
             <label htmlFor="emailaddress">Email Address:</label>
-            <input id="emailaddress" name="emailaddress" type="email" value={state.data?.emailaddress}/>
-            {state.errors?.emailaddress && <p>state.errors.emailaddress[0]</p>}
+            <input id="emailaddress" name="emailaddress" type="email" disabled={isPending} defaultValue={ state.data?.emailaddress} className={state?.errors?.emailaddress ? 'border-500': ''}/>
+            {state?.errors?.emailaddress && <p className="text-red-500 text-sm">state.errors.emailaddress[0]</p>}
             <label htmlFor="firstname">Phone Number:</label>
-            <input id="phonenumber" name="phonenumber" type="tel" value={state.data?.phonenumber}/>
-            {state.errors?.phonenumber && <p>state.errors.phonenumber[0]</p>}
+            <input id="phonenumber" name="phonenumber" type="tel"  disabled={isPending} defaultValue={state.data?.phonenumber} className={state?.errors?.phonenumber ? 'border-500': ''}/>
+            {state?.errors?.phonenumber && <p className="text-red-500 text-sm">state.errors.phonenumber[0]</p>}
             <label htmlFor="firstname">Message:</label>
-            <textarea id="firstname" name="message" rows={30} cols={50} value={state.data?.message}></textarea>
-            {state.errors?.message && <p>state.errors.message[0]</p>}
+            <textarea id="firstname" name="message" rows={30} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'border-500': ''}></textarea>
+            {state?.errors?.message && <p className="text-red-500 text-sm">state.errors.message[0]</p>}
+            
+            {state?.success && <p className="text-green-600">User created successfully</p>}
+            {state?.message && <p className="text-red-600">{state.message}</p>}
             <SubmitButton/>
         </Form>
     )

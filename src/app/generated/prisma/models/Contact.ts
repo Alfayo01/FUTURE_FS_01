@@ -33,7 +33,7 @@ export type ContactAvgAggregateOutputType = {
 
 export type ContactSumAggregateOutputType = {
   id: number | null
-  phonenumber: number | null
+  phonenumber: bigint | null
 }
 
 export type ContactMinAggregateOutputType = {
@@ -41,7 +41,7 @@ export type ContactMinAggregateOutputType = {
   firstname: string | null
   lastname: string | null
   emailaddress: string | null
-  phonenumber: number | null
+  phonenumber: bigint | null
   message: string | null
 }
 
@@ -50,7 +50,7 @@ export type ContactMaxAggregateOutputType = {
   firstname: string | null
   lastname: string | null
   emailaddress: string | null
-  phonenumber: number | null
+  phonenumber: bigint | null
   message: string | null
 }
 
@@ -194,7 +194,7 @@ export type ContactGroupByOutputType = {
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: number
+  phonenumber: bigint
   message: string
   _count: ContactCountAggregateOutputType | null
   _avg: ContactAvgAggregateOutputType | null
@@ -226,7 +226,7 @@ export type ContactWhereInput = {
   firstname?: Prisma.StringFilter<"Contact"> | string
   lastname?: Prisma.StringFilter<"Contact"> | string
   emailaddress?: Prisma.StringFilter<"Contact"> | string
-  phonenumber?: Prisma.IntFilter<"Contact"> | number
+  phonenumber?: Prisma.BigIntFilter<"Contact"> | bigint | number
   message?: Prisma.StringFilter<"Contact"> | string
 }
 
@@ -247,7 +247,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
   firstname?: Prisma.StringFilter<"Contact"> | string
   lastname?: Prisma.StringFilter<"Contact"> | string
-  phonenumber?: Prisma.IntFilter<"Contact"> | number
+  phonenumber?: Prisma.BigIntFilter<"Contact"> | bigint | number
   message?: Prisma.StringFilter<"Contact"> | string
 }, "id" | "emailaddress">
 
@@ -273,34 +273,32 @@ export type ContactScalarWhereWithAggregatesInput = {
   firstname?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   lastname?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   emailaddress?: Prisma.StringWithAggregatesFilter<"Contact"> | string
-  phonenumber?: Prisma.IntWithAggregatesFilter<"Contact"> | number
+  phonenumber?: Prisma.BigIntWithAggregatesFilter<"Contact"> | bigint | number
   message?: Prisma.StringWithAggregatesFilter<"Contact"> | string
 }
 
 export type ContactCreateInput = {
-  id: number
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: number
+  phonenumber: bigint | number
   message: string
 }
 
 export type ContactUncheckedCreateInput = {
-  id: number
+  id?: number
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: number
+  phonenumber: bigint | number
   message: string
 }
 
 export type ContactUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.IntFieldUpdateOperationsInput | number
+  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -309,25 +307,24 @@ export type ContactUncheckedUpdateInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.IntFieldUpdateOperationsInput | number
+  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ContactCreateManyInput = {
-  id: number
+  id?: number
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: number
+  phonenumber: bigint | number
   message: string
 }
 
 export type ContactUpdateManyMutationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.IntFieldUpdateOperationsInput | number
+  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -336,7 +333,7 @@ export type ContactUncheckedUpdateManyInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.IntFieldUpdateOperationsInput | number
+  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -377,16 +374,24 @@ export type ContactSumOrderByAggregateInput = {
   phonenumber?: Prisma.SortOrder
 }
 
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type BigIntFieldUpdateOperationsInput = {
+  set?: bigint | number
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
 }
 
 
@@ -437,7 +442,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     firstname: string
     lastname: string
     emailaddress: string
-    phonenumber: number
+    phonenumber: bigint
     message: string
   }, ExtArgs["result"]["contact"]>
   composites: {}
@@ -866,7 +871,7 @@ export interface ContactFieldRefs {
   readonly firstname: Prisma.FieldRef<"Contact", 'String'>
   readonly lastname: Prisma.FieldRef<"Contact", 'String'>
   readonly emailaddress: Prisma.FieldRef<"Contact", 'String'>
-  readonly phonenumber: Prisma.FieldRef<"Contact", 'Int'>
+  readonly phonenumber: Prisma.FieldRef<"Contact", 'BigInt'>
   readonly message: Prisma.FieldRef<"Contact", 'String'>
 }
     

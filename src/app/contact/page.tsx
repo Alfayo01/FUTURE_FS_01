@@ -1,9 +1,10 @@
 
-import ContactButton from "@/components/ContactButton";
+//import ContactButton from "@/components/ContactButton";
 import ContactForm from "@/components/ContactForm";
 import FilePicker from "@/components/FilePicker";
 import ProgressBar from "@/components/ProgressBar";
 import Technology from "@/components/Technology";
+
 
 export default function ContactPage(){
     return (
@@ -13,6 +14,7 @@ export default function ContactPage(){
                               <Technology>
                               <ProgressBar/>
                             </Technology>
+                            <ContactForm/>
         </>
     )
 }

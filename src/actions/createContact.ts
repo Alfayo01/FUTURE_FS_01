@@ -1,16 +1,12 @@
-import {z, ZodError } from 'zod';
-import { ContactSchema, FormState } from "../schema/ContactSchema";
-//import { prisma } from '../lib/prisma';
-import { revalidatePath } from 'next/cache';
-//import { addContacts } from '@/lib/db-services';
-import { prisma } from '@/lib/prisma';
+import {z} from 'zod';
+import { ContactSchema, ContactState, FormState } from "../schema/ContactSchema";
+import { addContacts } from '@/lib/db-services';
+//import { prisma } from '@/lib/prisma';
+//import { redirect } from 'next/navigation';
 
 
 export async function createContact(prevData:FormState, formData: FormData) : Promise<FormState>{
-    const rawData = Object.fromEntries(formData.entries());
-
-    const validatedFields = await ContactSchema.safeParseAsync(rawData);
-    
+   const rawData = Object.fromEntries(formData.entries());
     /*const data = {
         firstname: formData.get("firstname"),
         lastname: formData.get("lastname"),
@@ -18,50 +14,43 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         phonenumber: formData.get("phonenumber"),
         message: formData.get("message")
     }*/
+    const validatedFields = ContactSchema.safeParse(rawData);
+    
 
-    const response = await fetch("http://localhost:3000/api/contact", {
-        method: "POST",
-        body: JSON.stringify(validatedFields.data),
-        headers: { "Content-Type": "application/json"}
-        
-    })
-    const apiResult = await response.json();
-
-         if(!validatedFields.success){
-
-             return {
-                message: "Invalid input",
-                errors: z.flattenError(validatedFields.error).fieldErrors     
-            };
-        }
-  
-
-
-    try{ 
-        //await addContacts(apiResult);
-        await prisma.contact.create({
-            data: apiResult.data,
-        })
-        revalidatePath("/")
+    if(!validatedFields.success){
+        const formFieldErrors = z.flattenError(validatedFields.error).fieldErrors;
         return {
-            message: "Form submitted succesfully",
-            errors: {}
-        };
-
-    } catch (err){
-        if(err instanceof ZodError){
-            return {
-                errors: z.flattenError(err).fieldErrors,
-                message: "Invalid input"
-            };
-       
-         }
-     return {
-        message: "A server error occured", 
-        errors:{}
-     };
-
+            success: false,
+            errors: {
+               firstname: formFieldErrors.firstname,
+               lastname: formFieldErrors.lastname,
+               emailaddress: formFieldErrors.emailaddress,
+               phonenumber: formFieldErrors.phonenumber,
+               message: formFieldErrors.message,
+            },
+            message: "Failed to create contact due to validation errors"
+        }
     }
 
-}
+    
+   
 
+    try {
+        // Add data to Prisma postgres
+        await addContacts(validatedFields.data);
+
+        //redirect('/contact') // Revalidate UI
+        return {
+            success: true,
+            message: "Form submitted successfully",
+            errors: {},
+            
+        }
+    }catch(err){
+            return {
+                success: false,
+                message: "Database error",
+                errors: {}, 
+            }
+    }
+}

@@ -4,7 +4,7 @@ import { ContactSchema } from "@/schema/ContactSchema";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request){
-    try {
+    /*try {
     const body = await req.json();
     
     const validatedFields = ContactSchema.safeParse(body);
@@ -13,15 +13,20 @@ export async function POST(req: Request){
         return new NextResponse(JSON.stringify({ error: validatedFields.error }))
 
     }
-    /*const newContact = await prisma.contact.create({
-        data: new Response(JSON.stringify(validatedFields.data)).json(),
-    })//await addContacts(validatedFields.data);
-    return NextResponse.json({ newContact }, {status: 201}); */
+    
+    const data = new Response(JSON.stringify(validatedFields.data));
+
+    const newContact = await prisma.contact.create({
+        data: data,
+    });
+    //await addContacts(validatedFields.data);
+    return NextResponse.json({ newContact }, {status: 201, message: "Form submitted successfully"}); 
 
     } catch(err){
-        return new NextResponse("Internal Server Error", { status: 404});
+        return new NextResponse("Internal Server Error", { status: 404, message: "Failed to submit contact form"});
     }
-    
+    */
+   return new Response("Vibes and Insight")
 }
 
 
