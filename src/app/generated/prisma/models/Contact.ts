@@ -28,12 +28,10 @@ export type AggregateContact = {
 
 export type ContactAvgAggregateOutputType = {
   id: number | null
-  phonenumber: number | null
 }
 
 export type ContactSumAggregateOutputType = {
   id: number | null
-  phonenumber: bigint | null
 }
 
 export type ContactMinAggregateOutputType = {
@@ -41,8 +39,9 @@ export type ContactMinAggregateOutputType = {
   firstname: string | null
   lastname: string | null
   emailaddress: string | null
-  phonenumber: bigint | null
+  phonenumber: string | null
   message: string | null
+  createdAt: Date | null
 }
 
 export type ContactMaxAggregateOutputType = {
@@ -50,8 +49,9 @@ export type ContactMaxAggregateOutputType = {
   firstname: string | null
   lastname: string | null
   emailaddress: string | null
-  phonenumber: bigint | null
+  phonenumber: string | null
   message: string | null
+  createdAt: Date | null
 }
 
 export type ContactCountAggregateOutputType = {
@@ -61,18 +61,17 @@ export type ContactCountAggregateOutputType = {
   emailaddress: number
   phonenumber: number
   message: number
+  createdAt: number
   _all: number
 }
 
 
 export type ContactAvgAggregateInputType = {
   id?: true
-  phonenumber?: true
 }
 
 export type ContactSumAggregateInputType = {
   id?: true
-  phonenumber?: true
 }
 
 export type ContactMinAggregateInputType = {
@@ -82,6 +81,7 @@ export type ContactMinAggregateInputType = {
   emailaddress?: true
   phonenumber?: true
   message?: true
+  createdAt?: true
 }
 
 export type ContactMaxAggregateInputType = {
@@ -91,6 +91,7 @@ export type ContactMaxAggregateInputType = {
   emailaddress?: true
   phonenumber?: true
   message?: true
+  createdAt?: true
 }
 
 export type ContactCountAggregateInputType = {
@@ -100,6 +101,7 @@ export type ContactCountAggregateInputType = {
   emailaddress?: true
   phonenumber?: true
   message?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -194,8 +196,9 @@ export type ContactGroupByOutputType = {
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: bigint
+  phonenumber: string
   message: string
+  createdAt: Date
   _count: ContactCountAggregateOutputType | null
   _avg: ContactAvgAggregateOutputType | null
   _sum: ContactSumAggregateOutputType | null
@@ -226,8 +229,9 @@ export type ContactWhereInput = {
   firstname?: Prisma.StringFilter<"Contact"> | string
   lastname?: Prisma.StringFilter<"Contact"> | string
   emailaddress?: Prisma.StringFilter<"Contact"> | string
-  phonenumber?: Prisma.BigIntFilter<"Contact"> | bigint | number
+  phonenumber?: Prisma.StringFilter<"Contact"> | string
   message?: Prisma.StringFilter<"Contact"> | string
+  createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -237,6 +241,7 @@ export type ContactOrderByWithRelationInput = {
   emailaddress?: Prisma.SortOrder
   phonenumber?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -247,8 +252,9 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContactWhereInput | Prisma.ContactWhereInput[]
   firstname?: Prisma.StringFilter<"Contact"> | string
   lastname?: Prisma.StringFilter<"Contact"> | string
-  phonenumber?: Prisma.BigIntFilter<"Contact"> | bigint | number
+  phonenumber?: Prisma.StringFilter<"Contact"> | string
   message?: Prisma.StringFilter<"Contact"> | string
+  createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
 }, "id" | "emailaddress">
 
 export type ContactOrderByWithAggregationInput = {
@@ -258,6 +264,7 @@ export type ContactOrderByWithAggregationInput = {
   emailaddress?: Prisma.SortOrder
   phonenumber?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.ContactCountOrderByAggregateInput
   _avg?: Prisma.ContactAvgOrderByAggregateInput
   _max?: Prisma.ContactMaxOrderByAggregateInput
@@ -273,16 +280,18 @@ export type ContactScalarWhereWithAggregatesInput = {
   firstname?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   lastname?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   emailaddress?: Prisma.StringWithAggregatesFilter<"Contact"> | string
-  phonenumber?: Prisma.BigIntWithAggregatesFilter<"Contact"> | bigint | number
+  phonenumber?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   message?: Prisma.StringWithAggregatesFilter<"Contact"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
 }
 
 export type ContactCreateInput = {
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: bigint | number
+  phonenumber: string
   message: string
+  createdAt?: Date | string
 }
 
 export type ContactUncheckedCreateInput = {
@@ -290,16 +299,18 @@ export type ContactUncheckedCreateInput = {
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: bigint | number
+  phonenumber: string
   message: string
+  createdAt?: Date | string
 }
 
 export type ContactUpdateInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  phonenumber?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -307,8 +318,9 @@ export type ContactUncheckedUpdateInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  phonenumber?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContactCreateManyInput = {
@@ -316,16 +328,18 @@ export type ContactCreateManyInput = {
   firstname: string
   lastname: string
   emailaddress: string
-  phonenumber: bigint | number
+  phonenumber: string
   message: string
+  createdAt?: Date | string
 }
 
 export type ContactUpdateManyMutationInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  phonenumber?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContactUncheckedUpdateManyInput = {
@@ -333,8 +347,9 @@ export type ContactUncheckedUpdateManyInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
   emailaddress?: Prisma.StringFieldUpdateOperationsInput | string
-  phonenumber?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  phonenumber?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContactCountOrderByAggregateInput = {
@@ -344,11 +359,11 @@ export type ContactCountOrderByAggregateInput = {
   emailaddress?: Prisma.SortOrder
   phonenumber?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ContactAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  phonenumber?: Prisma.SortOrder
 }
 
 export type ContactMaxOrderByAggregateInput = {
@@ -358,6 +373,7 @@ export type ContactMaxOrderByAggregateInput = {
   emailaddress?: Prisma.SortOrder
   phonenumber?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ContactMinOrderByAggregateInput = {
@@ -367,23 +383,19 @@ export type ContactMinOrderByAggregateInput = {
   emailaddress?: Prisma.SortOrder
   phonenumber?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ContactSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  phonenumber?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type BigIntFieldUpdateOperationsInput = {
-  set?: bigint | number
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -403,6 +415,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   emailaddress?: boolean
   phonenumber?: boolean
   message?: boolean
+  createdAt?: boolean
 }, ExtArgs["result"]["contact"]>
 
 export type ContactSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -412,6 +425,7 @@ export type ContactSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   emailaddress?: boolean
   phonenumber?: boolean
   message?: boolean
+  createdAt?: boolean
 }, ExtArgs["result"]["contact"]>
 
 export type ContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -421,6 +435,7 @@ export type ContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   emailaddress?: boolean
   phonenumber?: boolean
   message?: boolean
+  createdAt?: boolean
 }, ExtArgs["result"]["contact"]>
 
 export type ContactSelectScalar = {
@@ -430,9 +445,10 @@ export type ContactSelectScalar = {
   emailaddress?: boolean
   phonenumber?: boolean
   message?: boolean
+  createdAt?: boolean
 }
 
-export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "emailaddress" | "phonenumber" | "message", ExtArgs["result"]["contact"]>
+export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "emailaddress" | "phonenumber" | "message" | "createdAt", ExtArgs["result"]["contact"]>
 
 export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Contact"
@@ -442,8 +458,9 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     firstname: string
     lastname: string
     emailaddress: string
-    phonenumber: bigint
+    phonenumber: string
     message: string
+    createdAt: Date
   }, ExtArgs["result"]["contact"]>
   composites: {}
 }
@@ -871,8 +888,9 @@ export interface ContactFieldRefs {
   readonly firstname: Prisma.FieldRef<"Contact", 'String'>
   readonly lastname: Prisma.FieldRef<"Contact", 'String'>
   readonly emailaddress: Prisma.FieldRef<"Contact", 'String'>
-  readonly phonenumber: Prisma.FieldRef<"Contact", 'BigInt'>
+  readonly phonenumber: Prisma.FieldRef<"Contact", 'String'>
   readonly message: Prisma.FieldRef<"Contact", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Contact", 'DateTime'>
 }
     
 

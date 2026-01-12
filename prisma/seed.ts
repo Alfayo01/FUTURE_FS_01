@@ -27,14 +27,14 @@ const contactData: Prisma.ContactCreateInput[]  = [
     firstname: "Okuku",
     lastname: "Deli",
     emailaddress: "okukudeli@gov.kido",
-    phonenumber: 2346785910,
+    phonenumber: "+(234)-678-5910",
     message: "need a medical clinic website asap can we talk",
 },
 {
     firstname: "Franco",
     lastname: "Lwambo",
     emailaddress: "francolwambo@gov.kido",
-    phonenumber: 2367785910,
+    phonenumber: "+(236)-778-5910",
     message: "need a medical clinic website asap can we talk",
 }
 ]

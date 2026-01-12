@@ -18,6 +18,7 @@ model Contact {
   firstname String
   lastname String
   emailaddress String @unique
-  phonenumber BigInt
+  phonenumber String
   message String
+  createdAt DateTime @default(now())
 }

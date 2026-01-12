@@ -19,7 +19,7 @@ const initialState:FormState = {
                 firstname: '',
                 lastname: '',
                 emailaddress: '',
-                phonenumber: Number(12345),
+                phonenumber: '',
                 message: '',
             }
 }
@@ -32,24 +32,34 @@ export default function ContactForm(){
         initialState,
 );
     return (
-        <Form action={contactAction} className="shadow-md/30 text-black flex flex-col max-w-96 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
+        <Form action={contactAction} className="shadow-md/30 text-black flex flex-col gap-4 sm:max-width-1/2 lg:max-w-4/8 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
+            <div>
             <h1 className="text-2xl font-semibold-semi-expanded text-center mb-3">Contact Form</h1>
-            <label htmlFor="firstname">First Name:</label>
-            <input id="firstname" name="firstname" type="text" disabled={isPending} defaultValue={state.data?.firstname} className={state?.errors?.firstname ? 'border-500': ''}/>
-            {state?.errors?.firstname && <p className="text-red-500 text-sm">state.errors.firstname[0]</p>}
-            <label htmlFor="firstname">Last Name:</label>
-            <input id="lastname" name="lastname" type="text" disabled={isPending} defaultValue={state.data?.lastname} className={state?.errors?.lastname ? 'border-500': ''}/>
-            {state?.errors?.lastname && <p className="text-red-500 text-sm">state.errors.lastname[0]</p>}
-            <label htmlFor="emailaddress">Email Address:</label>
-            <input id="emailaddress" name="emailaddress" type="email" disabled={isPending} defaultValue={ state.data?.emailaddress} className={state?.errors?.emailaddress ? 'border-500': ''}/>
-            {state?.errors?.emailaddress && <p className="text-red-500 text-sm">state.errors.emailaddress[0]</p>}
-            <label htmlFor="firstname">Phone Number:</label>
-            <input id="phonenumber" name="phonenumber" type="tel"  disabled={isPending} defaultValue={state.data?.phonenumber} className={state?.errors?.phonenumber ? 'border-500': ''}/>
-            {state?.errors?.phonenumber && <p className="text-red-500 text-sm">state.errors.phonenumber[0]</p>}
-            <label htmlFor="firstname">Message:</label>
-            <textarea id="firstname" name="message" rows={30} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'border-500': ''}></textarea>
-            {state?.errors?.message && <p className="text-red-500 text-sm">state.errors.message[0]</p>}
-            
+            <label htmlFor="firstname" className="block text-sm font-medium text-black-700">First Name:</label>
+            <input id="firstname" name="firstname" type="text" disabled={isPending} defaultValue={state.data?.firstname} className={state?.errors?.firstname ? 'border-500 md:w-full': ''}/>
+            {state?.errors?.firstname && (<p className="text-red-500 text-sm">{state.errors.firstname[0]}</p>)}
+            </div>
+            <div>
+            <label htmlFor="firstname" className="block text-sm font-medium text-black-700">Last Name:</label>
+            <input id="lastname" name="lastname" type="text" disabled={isPending} defaultValue={state.data?.lastname} className={state?.errors?.lastname ? 'border-500 md:w-full': ''}/>
+            {state?.errors?.lastname && (<p className="text-red-500 text-sm">{state.errors.lastname[0]}</p>)}
+            </div>
+            <div>
+            <label htmlFor="emailaddress" className="block text-sm font-medium text-black-700">Email Address:</label>
+            <input id="emailaddress" name="emailaddress" type="email" disabled={isPending} defaultValue={ state.data?.emailaddress} className={state?.errors?.emailaddress ? 'border-500 w-full': ''}/>
+            {state?.errors?.emailaddress && (<p className="text-red-500 text-sm">{state.errors.emailaddress[0]}</p>)}
+            </div>
+            <div>
+            <label htmlFor="firstname" className="block text-sm font-medium text-black-700">Phone Number:</label>
+            <input id="phonenumber" name="phonenumber" type="tel"  disabled={isPending} placeholder="+1 (455) 000-000" pattern="[+0-9\s\-()]" defaultValue={state.data?.phonenumber} className={state?.errors?.phonenumber ? 'border-500 md:w-full': ''}/>
+            {state?.errors?.phonenumber && (<p className="text-red-500 text-sm">{state.errors.phonenumber[0]}</p>)}
+            </div>
+            <div>
+            <label htmlFor="firstname" className="block text-sm font-medium text-black-700">Message:</label>
+            <textarea id="firstname" name="message" rows={20} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'border-500 block w-full p-3 rounded-md shadow-sm border focus:ring-indigo-500 focus:border-indigo-500': ''}></textarea>
+            {state?.errors?.message && (<p className="text-red-500 text-sm">{state.errors.message[0]}</p>)}
+            </div>
+
             {state?.success && <p className="text-green-600">User created successfully</p>}
             {state?.message && <p className="text-red-600">{state.message}</p>}
             <SubmitButton/>
