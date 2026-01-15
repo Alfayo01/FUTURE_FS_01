@@ -21,6 +21,7 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
 
     if(!validatedFields.success){
         const formFieldErrors = z.flattenError(validatedFields.error).fieldErrors;
+        console.error(formFieldErrors);
         return {
             success: false,
             errors: {
@@ -34,8 +35,6 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         }
     }
 
-    
-   
 
     try {
         // Add data to Prisma postgres
@@ -53,7 +52,7 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
             
         }
     }catch(err){
-        console.error('Database ops failed', err);
+        //console.error('Database ops failed', err);
             return {
                 success: false,
                 message: "Database error",

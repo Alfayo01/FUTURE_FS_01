@@ -1,13 +1,21 @@
 "use client"
 import Link from "next/link";
+import { useEffect } from 'react';
 
-export default function NotFound({ error }: { error: Error}){
-    const response = new Response();
+export default function GlobalNotFound({ error }: { error: Error} & { digest?: string }){
+    useEffect(() => {
+        console.log(error);
+
+    }, [error])
+    
     return (
-        <div>
-            <h2>{response.status}</h2>
-            <p>{error.message}</p>
-            <Link href="/">Return Home</Link>
-        </div>
+        <html>
+            <body>
+            <div>
+                <h2>{error.message}</h2>
+                <Link href="/">Return Home</Link>
+            </div>
+            </body>
+        </html>
     )
 }

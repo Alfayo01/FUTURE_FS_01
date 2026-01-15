@@ -2,7 +2,10 @@
 import { regexes, z } from 'zod';
 
 export const ContactSchema = z.object({
-    id: z.coerce.number().int().positive(),
+    id: z.preprocess((val) => { 
+        const processed = val === '' ? undefined : val;
+        return processed;
+     }, z.coerce.number({ error: "Please enter a valid number", }).optional()),
     firstname: z.string().min(3, { error: "Incorrect first name.Try again"}),
     lastname: z.string().min(3, { error: "Incorrect last name.Try again"}),
     emailaddress: z.email({pattern: regexes.unicodeEmail, error: "Incorrect email address.Try again"}),

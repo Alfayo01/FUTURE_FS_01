@@ -7,6 +7,8 @@ import { useFormStatus } from "react-dom";
 
 function SubmitButton(){
     const {pending} = useFormStatus();
+    
+
     return (
             <button type="submit" disabled={ pending } className="outline-2 focus:outline-black bg-amber-900 text-amber-50 font-semibold rounded-sm w-full p-3 shadow-lg shadow-amber-900/50">{pending ? 'Sending':'Send'}</button>
     )
@@ -61,8 +63,7 @@ export default function ContactForm(){
             </div>
 
             {state?.success && <p className="text-green-600">User created successfully</p>}
-            {state?.message && <p className="text-red-600">{state.message
-            }</p>}
+            {state?.message && (<p className="text-red-600" aria-live="polite">{state.message}</p>)}
             <SubmitButton/>
         </Form>
     )
