@@ -52,3 +52,20 @@ function parsePhoneNumberFromString(value: string):boolean {
     return telephoneRegex.test(value);
 }
 
+const EmailAddressSchema = z.email({pattern: regexes.unicodeEmail, error: "Incorrect email address.Try again"});
+
+export const NodemailerMailOptionsSchema = z.object({
+    from: EmailAddressSchema,
+    to: z.union([EmailAddressSchema, z.string().min(1, {error: "Recipient(s) is required"})]).transform((val) => {
+        return val;
+    }),
+    subject: z.string().min(1, {error: "Subject is required"}),
+    text: z.string(),
+    html: z.string().min(1, { error: "HTML body is required"}),
+
+    cc: z.string().optional(),
+    bcc: z.string().optional(),
+    replyTo: z.string().optional(),
+})
+
+export type NodemailerMailOptions = z.infer<typeof NodemailerMailOptionsSchema>;
