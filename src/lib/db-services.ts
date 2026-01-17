@@ -39,11 +39,6 @@ export async function deleteContact(data: DeleteContactInput){
     });
 }
 
-module.exports = {
-    getContacts,
-    getContact,
-    addContacts,
-    deleteContact
-}
+
 
 
