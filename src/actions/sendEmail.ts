@@ -8,7 +8,7 @@ import z from 'zod';
 export async function sendEmail(mailOptions: NodemailerMailOptions){
 
     const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: process.env.SMTP_HOST,
     service: process.env.SMTP_SERVICE,
     //port: process.env.SMTP_PORT,
     secure: true,

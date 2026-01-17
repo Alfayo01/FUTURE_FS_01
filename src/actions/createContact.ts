@@ -77,7 +77,7 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
             errors: {},
             
         }
-        
+
     }catch(err){
         console.error('Database ops failed', err);
             return {
