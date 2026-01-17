@@ -48,18 +48,13 @@ export async function createContact(prevData:FormState, formData: FormData) : Pr
         
         const { firstname, lastname, emailaddress, message } = validatedFields.data
 
-        /*let formVal = {
-            name: `${formData.get('firstname') as string} + ' '+ ${formData.get('lastname') as string}`,
-            email: formData.get('emailaddress') as string,
-            message: formData.get('message') as string,
-        }*/
         let formVal = {
             name: `${firstname} + ' '+ ${lastname}`,
             email: emailaddress,
             message: message,
         }
         const mailOptions = {
-        from: formVal.email,
+        from: '"Customer enquiry"<' + formVal.email + '>',
         to: process.env.SMTP_USER as string,
         subject: `New message from ${formVal.name}`,
         text: message,

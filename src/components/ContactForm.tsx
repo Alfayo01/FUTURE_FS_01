@@ -58,7 +58,7 @@ export default function ContactForm(){
             </div>
             <div>
             <label htmlFor="message" className="block text-sm font-medium text-black-700">Message:</label>
-            <textarea id="message" name="message" rows={20} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'border-500 block w-full p-3 rounded-md shadow-sm border focus:ring-indigo-500 focus:border-indigo-500': ''}></textarea>
+            <textarea id="message" name="message" rows={20} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'block w-full p-3 rounded-md shadow-sm border focus:ring-indigo-500 focus:border-indigo-500': ''}></textarea>
             {state?.errors?.message && (<p className="text-red-500 text-sm">{state.errors.message[0]}</p>)}
             </div>
 

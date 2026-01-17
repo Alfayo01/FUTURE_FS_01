@@ -8,13 +8,16 @@ import z from 'zod';
 export async function sendEmail(mailOptions: NodemailerMailOptions){
 
     const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    //host: process.env.SMTP_HOST,
     service: process.env.SMTP_SERVICE,
     //port: process.env.SMTP_PORT,
-    secure: true,
+    //secure: false,
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD
+    },
+    tls: {
+        ciphers: 'SSLv3',
     },
     debug: true,
     logger: true,
