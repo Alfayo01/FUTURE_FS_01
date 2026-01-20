@@ -1,5 +1,4 @@
-
-const projects = [
+export const projects = [
     {
         id: 1,
         name: "Cattle Price Prediction using KNN regressor",
@@ -11,18 +10,16 @@ const projects = [
         name: "Experiemental mini e-commerce using Spring Boot API and Angular/React",
         description: "Project Used Spring Boot API for backend and React/Angular for frontend",
         tags: ["Hibernate ORM", "Lombok", "JWT", "Angular", "React"]
-    }
+    },
+    {
+        id: 3,
+        name: "AI page rebuild using AI SDK and React",
+        description: "Project Used AI SDK for backend and React for frontend",
+        tags: ["AI SDK", "Open AI", "OpenAIRouter", "AI Reverse Engineering", "React"]
+    },
 ];
-export default async function Projects({ params }: { params: Promise<{projectId: string}>}){
 
-    const project_id = ((await params)).projectId;
-
-
-
-    return (
-    <>
-        <h1>Project {project_id}</h1>
-        <p><b>Tune in to view my projects</b></p>
-    </>
-    )
+export async function getProjectById(id: string | number){
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return projects.find((project) => project.id === id);
 }
