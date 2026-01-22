@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectById } from "../projects";
+import { projects, getProjectById } from "../../../lib/projects";
 
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{project_id: string }>}){
