@@ -1,13 +1,13 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { projects, getProjectById } from "../../../lib/projects";
+import { getProjectById } from "../../../lib/projects";
 
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{project_id: string }>}){
 
     const { project_id } = await params;
-
+    
     const project = await getProjectById(project_id);
 
     if(!project){

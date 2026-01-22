@@ -1,12 +1,39 @@
-"use client"
+
 import Card from "@/components/Card";
 import Link from "next/link";
-import { projects } from "../../lib/projects";
 import CardSkeleton from "@/components/CardSkeleton";
 import { Suspense } from "react";
 
 
-export default function Projects() {
+async function getProjects(){
+    const projects = [
+    {
+        id: 1,
+        name: "Cattle Price Prediction using KNN regressor",
+        description: "Project Used KNN for unsupervsied ML project top",
+        tags: ["SciKit-Learn", "NumPy", "Pandas", "Matplotlib", "SeaBorn"]
+    },
+    {
+        id: 2,
+        name: "Experiemental mini e-commerce using Spring Boot API and Angular/React",
+        description: "Project Used Spring Boot API for backend and React/Angular for frontend",
+        tags: ["Hibernate ORM", "Lombok", "JWT", "Angular", "React"]
+    },
+    {
+        id: 3,
+        name: "AI page rebuild using AI SDK and React",
+        description: "Project Used AI SDK for backend and React for frontend",
+        tags: ["AI SDK", "Open AI", "OpenAIRouter", "AI Reverse Engineering", "React"]
+    },
+];
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return projects;
+}
+
+export default async function Projects() {
+
+    const projects = await getProjects();
 
      return (
         <div className="min-h-screen bg-gray-50 p-6">
@@ -20,7 +47,7 @@ export default function Projects() {
         <Suspense fallback={<LoadingSkeletons/>}>
         {projects.flatMap((project) => (
             <Link href={`/projects/${project.id}`} key={project.id}>
-            <Card src={''} width={200} height={200} alt={''}>
+            <Card width={200} height={200}>
                 <div>
                 <h2>{project.name}</h2>
                 <p className="mt-2 line-clamp-2">{project.description}</p>

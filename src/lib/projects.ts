@@ -1,4 +1,7 @@
-export const projects = [
+"use server"
+
+export async function getProjectById(id: string | number){
+    const projects = [
     {
         id: 1,
         name: "Cattle Price Prediction using KNN regressor",
@@ -18,8 +21,7 @@ export const projects = [
         tags: ["AI SDK", "Open AI", "OpenAIRouter", "AI Reverse Engineering", "React"]
     },
 ];
-
-export async function getProjectById(id: string | number){
+    const project = projects.find((project) => project.id === id);
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    return projects.find((project) => project.id === id);
+    return project;
 }
