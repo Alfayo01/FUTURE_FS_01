@@ -33,7 +33,7 @@ export default function ContactForm(){
         initialState
 );
     return (
-        <form action={contactAction} className="shadow-md/30 text-black flex flex-col gap-4 sm:max-width-1/2 lg:max-w-4/8 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
+        <form action={contactAction} className="shadow-md/30 text-black flex flex-col gap-4 max-width-1/2 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
             <div>
             <h1 className="text-2xl font-semibold-semi-expanded text-center mb-3">Contact Form</h1>
             <label htmlFor="firstname" className="block text-sm font-medium text-black-700">First Name:</label>

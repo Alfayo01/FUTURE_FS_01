@@ -1,9 +1,12 @@
-"use client"
+//import { proficiencyList } from "@/lib/proficiencyList";
 
-export default function ProgressBar(){
+
+//const progressVal = proficiencyList.flatMap((tech) => tech.progressValue.map((progVal) => progVal))
+export default function ProgressBar({ value, max, children }:{ value:number; max: number; children?:React.ReactNode}){
     return (
-        <>
-        <input type="range" id="temp" step="1"/>
-        </>
+        <div>  
+                <progress id="temp" className="h-2" value={value} max={max} />
+                {children}
+        </div>
     )
 }

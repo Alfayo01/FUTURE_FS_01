@@ -1,19 +1,14 @@
 
 //import ContactButton from "@/components/ContactButton";
 import ContactForm from "@/components/ContactForm";
-import FilePicker from "@/components/FilePicker";
-import ProgressBar from "@/components/ProgressBar";
+//import FilePicker from "@/components/FilePicker";
 import Technology from "@/components/Technology";
-
 
 export default function ContactPage(){
     return (
-        <>
-            <p>To reach out to me</p>
-                            <FilePicker/>
-                              <Technology>
-                              <ProgressBar/>
-                            </Technology>
+        <>                 
+                            <Technology/>
+                            <p className="text-4xl font-bold text-center p-4">Reach out to me:</p>
                             <ContactForm/>
         </>
     )
