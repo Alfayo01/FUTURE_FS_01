@@ -33,7 +33,7 @@ export default function ContactForm(){
         initialState
 );
     return (
-        <form action={contactAction} className="shadow-md/30 text-black flex flex-col gap-4 max-width-1/2 px-6 space-y-6 py-8 m-auto rounded-2xl outline-2 outline-black bg-white">
+        <form action={contactAction} className="backdrop-blur-md bg-white/90 w-full shadow-lg text-black flex flex-col gap-4 max-w-xl sm:max-w-lg px-4 space-y-6 py-8 mx-auto rounded-2xl outline-2 outline-black">
             <div>
             <h1 className="text-2xl font-semibold-semi-expanded text-center mb-3">Contact Form</h1>
             <label htmlFor="firstname" className="block text-sm font-medium text-black-700">First Name:</label>
@@ -57,7 +57,7 @@ export default function ContactForm(){
             </div>
             <div>
             <label htmlFor="message" className="block text-sm font-medium text-black-700">Message:</label>
-            <textarea id="message" name="message" rows={20} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'block w-full p-3 rounded-md shadow-sm border focus:ring-indigo-500 focus:border-indigo-500': ''}></textarea>
+            <textarea id="message" name="message" rows={20} cols={50} disabled={isPending} defaultValue={state.data?.message} className={state?.errors?.message ? 'w-full sm:w-3/4 md:w-2/3 lg:w-1/2 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md shadow-sm border focus:ring-indigo-500 focus:border-indigo-500 resize-y min-h-24 sm:min-h-32': ''}></textarea>
             {state?.errors?.message && (<p className="text-red-500 text-sm">{state.errors.message[0]}</p>)}
             </div>
 

@@ -13,7 +13,7 @@ export default function Technology({children }:{children?: React.ReactNode}){
 
             return (
 
-                <details key={techIndex} className="shadow-md/30 outline-2 outline-black font-bold text-black px-3 py-3 m-2 rounded-lg bg-sky-100">
+                <details key={techIndex} className="backdrop-blur-md shadow-lg outline-2 outline-black font-bold text-black px-3 py-3 m-2 rounded-lg bg-sky-100">
                     <summary><strong>{tech.name}</strong></summary>
                     <ul>{tech.tools.map((tool, toolIndex) => {
                         return (
