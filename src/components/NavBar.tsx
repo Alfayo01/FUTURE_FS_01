@@ -15,8 +15,8 @@ export default function NavBar(){
     ]
     return (
      
-        <nav className="w-full py-5 flex items-center justify-between">
-          <div className="flex items-center gap-8 justify-items-center md:place-items-center-safe">
+        <nav className="w-full py-5 flex items-center justify-center">
+          <div className="flex items-center gap-8 justify-items-center md:place-items-center-safe font-bold hover:text-amber-900 active:text-brown-600">
           { navLinks.map((link) => {
 
             const isActive = pathName === link.href || ( pathName.startsWith(link.href) && link.href !== "/" );

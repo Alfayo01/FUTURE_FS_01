@@ -1,24 +1,7 @@
-import Card from "@/components/Card";
 
-const projects = [
-    {
-        id: 1,
-        name: "Cattle Price Prediction using KNN regressor",
-        description: "Project Used KNN for unsupervsied ML project top",
-        tags: ["SciKit-Learn", "NumPy", "Pandas", "Matplotlib", "SeaBorn"]
-    },
-    {
-        id: 2,
-        name: "Experimental mini e-commerce using Spring Boot API and Angular/React",
-        description: "Project Used Spring Boot API for backend and React/Angular for frontend",
-        tags: ["Hibernate ORM", "Lombok", "JWT", "Angular", "React"]
-    }
-];
-
-//const getProject = projects.find((project) => project.id === id)
 export default function About(){
     return (
-    <article className=" backdrop-blur-md max-4xl mx-auto p-6 rounded-lg shadow-md text-md font-semibold">
+    <article className="backdrop-blur-md max-4xl mx-auto p-6 rounded-lg shadow-md text-md font-semibold">
         <h1 className="font-bold text-2xl mb-4">About me</h1>
         <p className="leading-relaxed">My name is Victor Alfayo Opoti</p>
         <p className="leading-relaxed">Second Class Honors Graduate at Strathmore University</p>
